@@ -1,7 +1,8 @@
 import React from "react";
 // TODO: add your screenshots, then uncomment these imports and use them in `image` below
 // import nithitexImg from "../assets/images/nithitex.png";
-// import varuviImg from "../assets/images/varuvi.png";
+import varuviImg from "../assets/images/v.png";
+import varuvi from "../assets/images/varuvi.png";
 
 const projects = [
   {
@@ -20,7 +21,7 @@ const projects = [
   {
     name: "Varuvi",
     kind: "Company website",
-    image: "", // varuviImg
+    image: { varuvi }, // varuviImg
     stack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
     points: ["Built the responsive company website from scratch.", "Tested layouts across browsers and screen sizes."],
     link: "", // add live URL

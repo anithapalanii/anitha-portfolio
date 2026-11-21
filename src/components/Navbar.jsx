@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-// TODO: put your resume PDF at /public/resume.pdf
+// TODO: confirm the resume file is at /public/resume.pdf
 const RESUME_URL = "/resume.pdf";
 
 const navLinks = [
@@ -15,30 +15,68 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("#home");
 
-  const closeMenu = () => setMenuOpen(false);
   const handleClick = (path) => {
     setActive(path);
-    closeMenu();
+    setMenuOpen(false);
   };
 
+  // Close mobile menu with the Escape key
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  // Close mobile menu if the screen grows to desktop size
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = (e) => {
+      if (e.matches) setMenuOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  // Highlight the link of the section currently in view
+  // TODO: section ids must match navLinks (home, about, skills, projects, contact)
+  useEffect(() => {
+    const sections = navLinks.map((item) => document.querySelector(item.path)).filter(Boolean);
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      { rootMargin: "-80% 0px -55% 0px" },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-10">
+    <header className="sticky top-0 z-50 border-b border-white/5 bg-black/90 backdrop-blur-md">
+      <nav className="relative mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-10">
         {/* Logo */}
-        <a href="#home" className="font-display text-2xl font-bold tracking-tight text-white">
-          Anitha P<span className="text-red-600">.</span>
+        <a href="#home" onClick={() => handleClick("#home")} className="font-display text-2xl font-bold text-white">
+          Anitha P<span className="text-red-500">.</span>
         </a>
 
-        {/* Desktop: pill nav + resume button */}
-        <div className="hidden items-center gap-3 md:flex">
-          <ul className="flex items-center gap-1 rounded-full border border-white/20 px-2 py-1.5">
+        {/* Desktop links (md and up) */}
+        <div className="hidden items-center gap-1 md:flex">
+          <ul className="flex items-center gap-1">
             {navLinks.map((item) => (
               <li key={item.path}>
                 <a
                   href={item.path}
                   onClick={() => handleClick(item.path)}
-                  className={`block rounded-full px-5 py-1.5 text-sm transition-colors ${
-                    active === item.path ? "text-red-700" : "text-gray-200 hover:text-red-600"
+                  className={`rounded-lg px-4 py-2 text-sm transition ${
+                    active === item.path ? "bg-red-500/10 text-red-500" : "text-gray-200 hover:bg-white/5 hover:text-red-500"
                   }`}>
                   {item.name}
                 </a>
@@ -46,42 +84,53 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* <a
+          <a
             href={RESUME_URL}
             download
-            className="flex items-center gap-2 rounded-full border border-orange-500/70 px-4 py-2 text-xs leading-tight text-white transition hover:bg-orange-600/20">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-orange-400">
-              <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span>
-              Download
-              <br />
-              Resume
-            </span>
-          </a> */}
+            className="ml-4 rounded-full border border-red-500/70 px-5 py-2 text-sm text-white transition hover:bg-red-600/20">
+            Download Resume
+          </a>
         </div>
 
-        {/* Mobile toggle */}
+        {/* Hamburger (mobile only) */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          aria-label="Toggle navigation"
           aria-expanded={menuOpen}
-          className="z-[60] text-xl text-white md:hidden">
-          <i className={`fi ${menuOpen ? "fi-rs-cross" : "fi-rs-bars-sort"}`}>w</i>
+          aria-controls="mobile-menu"
+          className="z-[60] text-white transition hover:text-red-500 md:hidden">
+          {menuOpen ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
 
-        {/* Mobile overlay */}
+        {/* Mobile dropdown */}
         <div
-          onClick={closeMenu}
-          className={`fixed inset-0 z-40  bg-black/60 transition-opacity duration-300 md:hidden ${
-            menuOpen ? "visible opacity-100" : "invisible opacity-0"
-          }`}
-        />
-
-        {/* Mobile drawer */}
-        <div
-          className={`fixed right-0 top-0 z-50 flex h-screen w-72 flex-col bg-neutral-950 px-6 pt-20 shadow-xl transition-transform duration-300 md:hidden ${
-            menuOpen ? "translate-x-0" : "translate-x-full"
+          id="mobile-menu"
+          className={`absolute left-5 right-5 top-full mt-3 rounded-2xl border border-red-500/30 bg-neutral-950 p-5 shadow-xl shadow-red-950/30 transition-all duration-300 md:hidden ${
+            menuOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-3 opacity-0 pointer-events-none"
           }`}>
           <ul className="flex flex-col gap-2">
             {navLinks.map((item) => (
@@ -89,13 +138,20 @@ const Navbar = () => {
                 <a
                   href={item.path}
                   onClick={() => handleClick(item.path)}
-                  className={`block rounded-lg px-3 py-3 text-base ${active === item.path ? "text-orange-500" : "text-gray-200"}`}>
+                  className={`block rounded-lg px-4 py-3 text-sm transition ${
+                    active === item.path ? "bg-red-500/10 text-red-500" : "text-gray-200 hover:bg-white/5 hover:text-red-500"
+                  }`}>
                   {item.name}
                 </a>
               </li>
             ))}
           </ul>
-          <a href={RESUME_URL} download className="mt-6 rounded-full border border-orange-500/70 px-5 py-2.5 text-center text-sm text-white">
+
+          <a
+            href={RESUME_URL}
+            download
+            onClick={() => setMenuOpen(false)}
+            className="mt-4 block rounded-full border border-red-500/70 px-4 py-3 text-center text-sm text-white transition hover:bg-red-600/20">
             Download Resume
           </a>
         </div>

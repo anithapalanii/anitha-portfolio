@@ -15,7 +15,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden bg-black bg-[radial-gradient(ellipse_at_85%_100%,#7c2d12_0%,#2a1004_40%,#000_75%)] px-5  md:px-10">
+      className="relative flex md:min-h-[calc(100vh-4rem)] min-h-[calc(100vh-6rem)] items-center overflow-hidden bg-black bg-[radial-gradient(ellipse_at_85%_100%,#7c2d12_0%,#2a1004_40%,#000_75%)] px-5  md:px-10">
       <style>{`
         @keyframes floaty { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
         .floaty { animation: floaty 4s ease-in-out infinite; }

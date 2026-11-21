@@ -36,12 +36,12 @@ const Contact = () => {
 
         <a
           href={`mailto:${EMAIL}`}
-          className="mt-10 inline-flex max-w-full items-center gap-3 rounded-full bg-red-700 px-6 py-3 text-base font-medium text-white transition hover:bg-red-600 sm:px-8 sm:text-sm">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="shrink-0">
+          className="mt-10 inline-flex max-w-full items-center gap-2 rounded-2xl bg-red-800 px-6 py-2  text-white transition hover:bg-red-700  text-sm ">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="shrink-0">
             <rect x="3" y="5" width="18" height="14" rx="3" />
             <path d="M4 8l8 6 8-6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span className="break-all">{EMAIL}</span>
+          <span className="break-all  ">{EMAIL}</span>
         </a>
 
         <dl className="mt-10 grid gap-4 text-left sm:grid-cols-2">
