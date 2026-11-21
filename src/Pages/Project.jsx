@@ -21,7 +21,7 @@ const projects = [
   {
     name: "Varuvi",
     kind: "Company website",
-    image: { varuvi }, // varuviImg
+    image: "", // varuviImg
     stack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
     points: ["Built the responsive company website from scratch.", "Tested layouts across browsers and screen sizes."],
     link: "", // add live URL

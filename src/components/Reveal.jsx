@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import "../css/Reveal.css";
 // Wraps any section; it slides down from the top + fades in when scrolled into view.
 export default function Reveal({ children, delay = 0, className = "" }) {
   const ref = useRef(null);

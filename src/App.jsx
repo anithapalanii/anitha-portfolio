@@ -13,6 +13,7 @@ export default function App() {
       <Navbar />
       <main>
         {/* Hero already has its own entrance animation, so it is not wrapped */}
+
         <Hero />
         <Reveal>
           <About />
