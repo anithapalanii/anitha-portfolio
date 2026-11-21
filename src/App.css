@@ -1,0 +1,305 @@
+@import url("https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-straight/css/uicons-regular-straight.css");
+
+@import url("https://cdn-uicons.flaticon.com/4.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css");
+
+@import url("https://fonts.googleapis.com/css2?family=New+Rocker&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-rocker: "New Rocker", system-ui;
+}
+
+/* TODO: if --main-color is already defined elsewhere in your project, remove this line */
+:root {
+  --main-color: #991b1b;
+}
+
+/* navbar head */
+.drift-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: driftIn 1.2s ease-out forwards !important;
+}
+.hero-section {
+  opacity: 0;
+  animation: herodriftIn 1.2s ease-out forwards;
+}
+
+@keyframes driftIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-35px) rotate(-10deg);
+    filter: blur(5px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateX(10px) rotate(2deg);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0);
+    filter: blur(0);
+  }
+}
+@keyframes herodriftIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-45px);
+    filter: blur(7px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(10px);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* ===================== Hero (hr-) additions ===================== */
+/* .hr-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+
+.hr-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(10, 10, 15, 0.92) 0%, rgba(10, 10, 15, 0.7) 50%, rgba(153, 27, 27, 0.35) 100%);
+  z-index: 1;
+}
+
+/* glowing blobs */
+.hr-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: 1;
+  opacity: 0.45;
+  animation: hrFloat 9s ease-in-out infinite;
+}
+.hr-blob-one {
+  width: 320px;
+  height: 320px;
+  background: var(--main-color);
+  top: -80px;
+  right: 10%;
+}
+.hr-blob-two {
+  width: 260px;
+  height: 260px;
+  background: #6366f1;
+  bottom: -60px;
+  left: 5%;
+  animation-delay: -4s;
+}
+
+/* badge */
+.hr-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: #e5e7eb;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+.hr-badge-dot {
+  /* width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); */
+  animation: hrPulse 2s infinite;
+}
+
+/* gradient name */
+.hr-gradient-text {
+  background: linear-gradient(90deg, #ffffff, #fca5a5, var(--main-color));
+  background-size: 200% auto;
+  /* -webkit-background-clip: text; */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hrShine 5s linear infinite;
+}
+
+.hr-role {
+  border-bottom: 2px solid var(--main-color);
+  padding-bottom: 2px;
+}
+
+/* .hr-desc {
+  line-height: 1.8;
+  max-width: 520px;
+} */
+
+/* chips */
+.hr-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.hr-chip {
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  color: #f3f4f6;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.hr-chip:hover {
+  background: var(--main-color);
+  border-color: var(--main-color);
+  transform: translateY(-3px);
+}
+
+/* buttons */
+.hr-btn-primary {
+  background: var(--main-color);
+  box-shadow: 0 8px 24px rgba(153, 27, 27, 0.45);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.hr-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(153, 27, 27, 0.65);
+}
+.hr-btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.hr-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+  transform: translateY(-3px);
+}
+
+/* floating code card */
+.hr-card {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(17, 17, 27, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+  animation: hrFloat 6s ease-in-out infinite;
+  overflow: hidden;
+}
+.hr-card-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+}
+.hr-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.hr-dot-r {
+  background: #ef4444;
+}
+.hr-dot-y {
+  background: #facc15;
+}
+.hr-dot-g {
+  background: #22c55e;
+}
+.hr-card-title {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+.hr-code {
+  padding: 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #fca5a5;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* scroll indicator */
+.hr-scroll {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  z-index: 2;
+}
+.hr-scroll-wheel {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  background: #fff;
+  border-radius: 2px;
+  animation: hrScroll 1.6s infinite;
+}
+
+/* keyframes */
+@keyframes hrFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+@keyframes hrPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+@keyframes hrShine {
+  to {
+    background-position: 200% center;
+  }
+}
+@keyframes hrScroll {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}

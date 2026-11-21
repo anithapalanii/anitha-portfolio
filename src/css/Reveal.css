@@ -1,0 +1,202 @@
+/* ===== ADD at the END of your existing CSS file (additive only, nothing existing is changed) ===== */
+
+/* smooth scrolling for anchor links; offset so sections aren't hidden under the sticky navbar */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+/* ---------- Navbar (nb-) ---------- */
+.nb-header {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(8, 8, 12, 0.72);
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+.nb-header.nb-scrolled {
+  background: rgba(8, 8, 12, 0.92);
+  border-color: rgba(153, 27, 27, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+.nb-bar {
+  transition: height 0.3s ease;
+}
+.nb-logo {
+  transition: transform 0.3s ease;
+}
+.nb-logo:hover {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 10px var(--main-color));
+}
+
+/* links */
+.nb-link {
+  position: relative;
+  display: block;
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  letter-spacing: 0.03em;
+  color: #d1d5db;
+  border-radius: 8px;
+  transition:
+    color 0.3s ease,
+    background 0.3s ease;
+}
+.nb-link::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--main-color), #fca5a5);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.nb-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+.nb-link:hover::after,
+.nb-link-active::after {
+  transform: scaleX(1);
+}
+.nb-link-active {
+  color: #fca5a5;
+}
+
+/* call to action */
+.nb-cta {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--main-color);
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(153, 27, 27, 0.45);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.nb-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(153, 27, 27, 0.7);
+}
+
+/* scroll progress bar */
+.nb-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--main-color), #fca5a5);
+  box-shadow: 0 0 10px var(--main-color);
+  transition: width 0.1s linear;
+}
+
+/* hamburger */
+.nb-burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+.nb-burger span {
+  display: block;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+.nb-burger-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nb-burger-open span:nth-child(2) {
+  opacity: 0;
+}
+.nb-burger-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* mobile dropdown (desktop layout is handled by Tailwind md: classes in the JSX) */
+@media (max-width: 767px) {
+  .nb-menu {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 20px;
+    background: rgba(8, 8, 12, 0.97);
+    border-bottom: 1px solid rgba(153, 27, 27, 0.4);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      max-height 0.4s ease,
+      opacity 0.3s ease,
+      padding 0.3s ease;
+  }
+  .nb-menu-open {
+    max-height: 420px;
+    opacity: 1;
+    padding: 16px 20px;
+  }
+  .nb-cta-wrap {
+    margin-top: 8px;
+  }
+  .nb-cta {
+    margin-left: 0;
+  }
+}
+@media (min-width: 768px) {
+  .nb-burger {
+    display: none;
+  }
+}
+
+/* ---------- Scroll reveal (rv-) : slides from top to bottom ---------- */
+.rv {
+  opacity: 0;
+  transform: translateY(-45px);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s ease-out;
+  will-change: opacity, transform;
+}
+.rv-in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rv {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
