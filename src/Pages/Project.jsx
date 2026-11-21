@@ -1,7 +1,7 @@
 import React from "react";
 // TODO: add your screenshots, then uncomment these imports and use them in `image` below
 // import nithitexImg from "../assets/images/nithitex.png";
-import varuviImg from "../assets/images/v.png";
+// import varuviImg from "../assets/images/v.png";
 import varuvi from "../assets/images/varuvi.png";
 
 const projects = [
