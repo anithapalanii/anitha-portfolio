@@ -35,9 +35,21 @@ const groups = [
     theme: "emerald",
     items: ["REST APIs", "Axios", "Fetch API", "Redux", "Multipart file uploads"],
   },
-  { title: "Web design", icon: "▭", span: "md:col-span-2", theme: "purple", items: ["Responsive design", "Website development", "Cross-browser compatibility"] },
+  {
+    title: "Web design",
+    icon: "▭",
+    span: "md:col-span-2",
+    theme: "purple",
+    items: ["Responsive design", "Website development", "Cross-browser compatibility"],
+  },
   { title: "Tools", icon: "⌥", span: "md:col-span-1", theme: "cyan", items: ["Git", "GitHub", "Postman"] },
-  { title: "Concepts", icon: "✓", span: "md:col-span-3", theme: "emerald", items: ["CRUD operations", "Form handling and validation", "State management"] },
+  {
+    title: "Concepts",
+    icon: "✓",
+    span: "md:col-span-3",
+    theme: "emerald",
+    items: ["CRUD operations", "Form handling and validation", "State management"],
+  },
 ];
 
 const Skills = () => {
@@ -70,7 +82,9 @@ const Skills = () => {
                 key={g.title}
                 className={`${g.span} group rounded-[28px] border ${t.border} bg-gradient-to-br ${t.accent} via-[#0b1227] to-[#06101b] p-5 shadow-2xl ${t.glow} transition duration-500 hover:-translate-y-1`}>
                 <div className="flex items-center gap-3">
-                  <span className={`flex h-10 w-10 items-center justify-center rounded-full font-mono text-sm font-bold ring-1 ${t.icon}`}>{g.icon}</span>
+                  <span className={`flex h-10 w-10 items-center justify-center rounded-full font-mono text-sm font-bold ring-1 ${t.icon}`}>
+                    {g.icon}
+                  </span>
                   <h3 className="font-display text-lg font-medium text-white">{g.title}</h3>
                 </div>
 
