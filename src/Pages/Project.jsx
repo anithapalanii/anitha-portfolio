@@ -1,47 +1,108 @@
 import React from "react";
-// TODO: add your screenshots, then uncomment these imports and use them in `image` below
-// import nithitexImg from "../assets/images/nithitex.png";
-// import varuviImg from "../assets/images/v.png";
 import varuvi from "../assets/images/varuvi.png";
+import oms from "../assets/images/oms.png";
+import nithi from "../assets/images/nithitex.png";
+// Add these imports when you have the screenshots
+// import nithitex from "../assets/images/nithitex.png";
+// import oms from "../assets/images/oms.png";
 
 const projects = [
   {
     name: "Nithitex",
-    kind: "Textile management application",
-    image: "", // nithitexImg
+    kind: "Textile Management Application",
+    image: nithi, // nithitex
+    theme: "purple",
     stack: ["React.js", "JavaScript", "Bootstrap", "CSS", "Redux Toolkit"],
     points: [
       "Built CRUD modules for employee management, inventory and product billing.",
-      "Connected the frontend to RESTful APIs with Axios and Fetch.",
+      "Connected frontend with RESTful APIs using Axios and Fetch.",
       "Added form validation, state management and multipart file uploads.",
-      "Made every screen work on desktop, tablet and mobile.",
+      "Fully responsive across desktop, tablet and mobile.",
     ],
-    link: "", // add live or GitHub URL
+    link: "",
   },
   {
     name: "Varuvi",
-    kind: "Company website",
-    image: "", // varuviImg
+    kind: "Company Website",
+    image: varuvi,
+    theme: "blue",
     stack: ["HTML5", "CSS3", "JavaScript", "Bootstrap"],
-    points: ["Built the responsive company website from scratch.", "Tested layouts across browsers and screen sizes."],
-    link: "", // add live URL
+    points: [
+      "Built the responsive company website from scratch.",
+      "Developed clean and user-friendly website layouts.",
+      "Tested layouts across browsers and screen sizes.",
+    ],
+    link: "",
+  },
+  {
+    name: "OMS",
+    kind: "Product",
+    image: oms, // oms
+    theme: "green",
+    stack: ["React.js", "JavaScript", "Bootstrap", "CSS", "Redux Toolkit"],
+    points: [
+      "Developed responsive user interface components.",
+      "Implemented reusable frontend layouts.",
+      "Focused on responsive design and usability.",
+    ],
+    link: "",
   },
 ];
 
-const ScreenshotFrame = ({ name, image }) => (
-  <div className="overflow-hidden rounded-2xl border border-white/15 bg-neutral-950 shadow-2xl shadow-orange-900/20">
-    <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-      <span className="h-3 w-3 rounded-full bg-red-500" />
-      <span className="h-3 w-3 rounded-full bg-yellow-500" />
-      <span className="h-3 w-3 rounded-full bg-green-500" />
-      <span className="ml-3 truncate rounded-full bg-white/5 px-3 py-0.5 text-xs text-gray-400">{name.toLowerCase()}.app</span>
+const themes = {
+  purple: {
+    border: "border-purple-500/70",
+    glow: "shadow-purple-600/20",
+    title: "text-purple-300",
+    badge: "border-purple-400/30 bg-purple-500/10 text-purple-200",
+    check: "bg-purple-500",
+    accent: "from-purple-600/20",
+  },
+  blue: {
+    border: "border-cyan-500/70",
+    glow: "shadow-cyan-500/20",
+    title: "text-cyan-300",
+    badge: "border-cyan-400/30 bg-cyan-500/10 text-cyan-200",
+    check: "bg-cyan-500",
+    accent: "from-cyan-600/20",
+  },
+  green: {
+    border: "border-emerald-500/70",
+    glow: "shadow-emerald-500/20",
+    title: "text-emerald-300",
+    badge: "border-emerald-400/30 bg-emerald-500/10 text-emerald-200",
+    check: "bg-emerald-500",
+    accent: "from-emerald-600/20",
+  },
+};
+
+const ScreenshotFrame = ({ name, image, theme }) => (
+  <div className="group overflow-hidden rounded-xl border border-white/20 bg-[#080d1d] shadow-2xl transition duration-500 hover:-translate-y-1">
+    {/* Browser header */}
+    <div className="flex items-center gap-2 border-b border-white/10 bg-[#111827] px-3 py-3">
+      <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
+      <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+      <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
+      <span className="ml-3 rounded-full bg-white/5 px-4 py-1 text-[10px] text-gray-400">{name.toLowerCase()}.app</span>
     </div>
 
+    {/* Screenshot */}
     {image ? (
-      <img src={image} alt={`${name} screenshot`} loading="lazy" className="aspect-video w-full object-cover object-top" />
+      <div className="aspect-video overflow-hidden bg-white">
+        <img
+          src={image}
+          alt={`${name} project screenshot`}
+          loading="lazy"
+          className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105"
+        />
+      </div>
     ) : (
-      <div className="flex aspect-video w-full items-center justify-center bg-gradient-to-br from-orange-950 via-neutral-950 to-black text-sm text-gray-500">
-        Add a {name} screenshot
+      <div className={`flex aspect-video items-center justify-center bg-gradient-to-br ${themes[theme].accent} via-[#10182d] to-[#050816]`}>
+        <div className="text-center">
+          <div className="mb-3 text-4xl text-white/30">⌘</div>
+          <p className="text-sm font-semibold text-white/70">{name}</p>
+          <p className="mt-1 text-xs text-gray-500">Add your project screenshot</p>
+        </div>
       </div>
     )}
   </div>
@@ -49,58 +110,79 @@ const ScreenshotFrame = ({ name, image }) => (
 
 const Project = () => {
   return (
-    <section
-      id="projects"
-      className="relative overflow-hidden bg-black bg-[radial-gradient(ellipse_at_0%_100%,#431407_0%,#140702_40%,#000_75%)] px-5 py-10 md:px-10">
-      <div className="pointer-events-none absolute -right-32 top-20 h-96 w-96 rounded-full bg-orange-600/15 blur-3xl" />
+    <section id="projects" className="relative overflow-hidden bg-[#030817] px-5 py-20 md:px-8 lg:px-12">
+      {/* Background effects */}
+      <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-red-700/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-red-600/15 blur-[120px]" />
 
-      <div className="relative mx-auto max-w-6xl">
-        <h2 className="font-display text-4xl font-light tracking-tight text-white md:text-5xl">Projects</h2>
-        <div className="mt-6 h-px w-40 bg-gradient-to-r from-orange-600 to-transparent" />
+      <div className="relative mx-auto max-w-7xl">
+        {/* Heading */}
+        <div className="mb-14 text-center">
+          <h2 className="font-display text-4xl font-bold tracking-tight text-white md:text-6xl">
+            My <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">Projects</span>
+          </h2>
 
-        <div className="mt-12 space-y-8">
-          {projects.map((p, i) => (
-            <article
-              key={p.name}
-              className="grid items-center gap-8 rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur-md md:grid-cols-2 md:p-8">
-              {/* image side alternates */}
-              <div className={i % 2 === 1 ? "md:order-2" : ""}>
-                <ScreenshotFrame name={p.name} image={p.image} />
-              </div>
+          <div className="mx-auto mt-5 flex max-w-xs items-center justify-center gap-4">
+            <span className="h-px flex-1 bg-gradient-to-r from-transparent to-purple-500" />
+            <span className="text-2xl text-cyan-400">{"</>"}</span>
+            <span className="h-px flex-1 bg-gradient-to-l from-transparent to-cyan-500" />
+          </div>
+        </div>
 
-              <div className={i % 2 === 1 ? "md:order-1" : ""}>
-                <h3 className="font-display text-2xl font-bold text-white">{p.name}</h3>
-                <p className="mt-1 text-sm text-gray-400">{p.kind}</p>
+        {/* Project Cards */}
+        <div className="grid grid-cols-1 gap-7 lg:grid-cols-3">
+          {projects.map((p) => {
+            const t = themes[p.theme];
 
-                <ul className="mt-4 flex flex-wrap gap-2">
+            return (
+              <article
+                key={p.name}
+                className={`group relative flex flex-col overflow-hidden rounded-[28px] border ${t.border} bg-gradient-to-br ${t.accent} via-[#0b1227] to-[#06101b] p-5 shadow-2xl ${t.glow} transition duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-6`}>
+                {/* Project title */}
+                <div className="mb-6 text-center">
+                  <h3 className="text-3xl font-bold tracking-tight text-white">{p.name}</h3>
+                  <p className={`mt-2 text-sm font-medium ${t.title}`}>{p.kind}</p>
+                </div>
+
+                {/* Project Screenshot */}
+                <ScreenshotFrame name={p.name} image={p.image} theme={p.theme} />
+
+                {/* Technology Stack */}
+                <div className="my-6 flex flex-wrap justify-center gap-2">
                   {p.stack.map((s) => (
-                    <li key={s} className="rounded-full border  text-xs border-orange-500/40 bg-orange-600/10 px-3 py-1 text-orange-300">
+                    <span key={s} className={`rounded-full border px-3 py-2 text-xs font-medium ${t.badge}`}>
                       {s}
-                    </li>
+                    </span>
                   ))}
-                </ul>
+                </div>
 
-                <ul className="mt-6 space-y-3 leading-7 text-gray-300">
+                <div className="mb-5 h-px bg-white/10" />
+
+                {/* Project Features */}
+                <ul className="flex-1 space-y-4">
                   {p.points.map((pt) => (
-                    <li key={pt} className="flex gap-3 text-sm ">
-                      <span className="mt-3 h-1.5 w-1.5 text-xs shrink-0 rounded-full bg-orange-500" />
-                      {pt}
+                    <li key={pt} className="flex items-start gap-3 text-sm leading-6 text-gray-200">
+                      <span className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${t.check} text-xs font-bold text-white`}>
+                        ✓
+                      </span>
+                      <span>{pt}</span>
                     </li>
                   ))}
                 </ul>
 
+                {/* View Project */}
                 {p.link && (
                   <a
                     href={p.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-6 inline-block rounded-full bg-orange-600 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-orange-500">
-                    View {p.name}
+                    className={`mt-7 inline-flex w-fit items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition hover:bg-white/10 ${t.badge}`}>
+                    View Project <span>↗</span>
                   </a>
                 )}
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

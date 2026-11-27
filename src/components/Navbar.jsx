@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 // TODO: confirm the resume file is at /public/resume.pdf
-const RESUME_URL = "/resume.pdf";
+import resume from "../assets/Pdf/Anitha.pdf";
+
+const RESUME_URL = resume;
 
 const navLinks = [
   { path: "#home", name: "Home" },
@@ -60,11 +62,11 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/5 bg-black/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#030817]/90 backdrop-blur-md">
       <nav className="relative mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-10">
         {/* Logo */}
         <a href="#home" onClick={() => handleClick("#home")} className="font-display text-2xl font-bold text-white">
-          Anitha P<span className="text-red-500">.</span>
+          Anitha P<span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">.</span>
         </a>
 
         {/* Desktop links (md and up) */}
@@ -76,7 +78,7 @@ const Navbar = () => {
                   href={item.path}
                   onClick={() => handleClick(item.path)}
                   className={`rounded-lg px-4 py-2 text-sm transition ${
-                    active === item.path ? "bg-red-500/10 text-red-500" : "text-gray-200 hover:bg-white/5 hover:text-red-500"
+                    active === item.path ? "bg-cyan-400/10 text-cyan-300" : "text-gray-200 hover:bg-white/5 hover:text-cyan-300"
                   }`}>
                   {item.name}
                 </a>
@@ -86,8 +88,10 @@ const Navbar = () => {
 
           <a
             href={RESUME_URL}
-            download
-            className="ml-4 rounded-full border border-red-500/70 px-5 py-2 text-sm text-white transition hover:bg-red-600/20">
+            download="Anitha_Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="ml-4 rounded-full border border-purple-400/60 bg-gradient-to-r from-purple-600/20 to-cyan-500/20 px-5 py-2 text-sm text-white transition hover:from-purple-600/40 hover:to-cyan-500/40">
             Download Resume
           </a>
         </div>
@@ -98,7 +102,7 @@ const Navbar = () => {
           aria-label="Toggle navigation"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          className="z-[60] text-white transition hover:text-red-500 md:hidden">
+          className="z-[60] text-white transition hover:text-cyan-300 md:hidden">
           {menuOpen ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +133,7 @@ const Navbar = () => {
         {/* Mobile dropdown */}
         <div
           id="mobile-menu"
-          className={`absolute left-5 right-5 top-full mt-3 rounded-2xl border border-red-500/30 bg-neutral-950 p-5 shadow-xl shadow-red-950/30 transition-all duration-300 md:hidden ${
+          className={`absolute left-5 right-5 top-full mt-3 rounded-2xl border border-purple-500/30 bg-[#0b1227] p-5 shadow-xl shadow-purple-950/40 transition-all duration-300 md:hidden ${
             menuOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-3 opacity-0 pointer-events-none"
           }`}>
           <ul className="flex flex-col gap-2">
@@ -139,7 +143,7 @@ const Navbar = () => {
                   href={item.path}
                   onClick={() => handleClick(item.path)}
                   className={`block rounded-lg px-4 py-3 text-sm transition ${
-                    active === item.path ? "bg-red-500/10 text-red-500" : "text-gray-200 hover:bg-white/5 hover:text-red-500"
+                    active === item.path ? "bg-cyan-400/10 text-cyan-300" : "text-gray-200 hover:bg-white/5 hover:text-cyan-300"
                   }`}>
                   {item.name}
                 </a>
@@ -149,9 +153,9 @@ const Navbar = () => {
 
           <a
             href={RESUME_URL}
-            download
+            download="Anitha_Resume.pdf"
             onClick={() => setMenuOpen(false)}
-            className="mt-4 block rounded-full border border-red-500/70 px-4 py-3 text-center text-sm text-white transition hover:bg-red-600/20">
+            className="mt-4 block rounded-full border border-purple-400/60 bg-gradient-to-r from-purple-600/20 to-cyan-500/20 px-4 py-3 text-center text-sm text-white">
             Download Resume
           </a>
         </div>
